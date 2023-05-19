@@ -1,4 +1,5 @@
 import tkinter as tk
+import threading
 import sys
 
 from tkinter import ttk
@@ -110,7 +111,7 @@ class App(tk.Frame):
 
         self.allAction = tk.Button(
             master,
-            text='全部执行\n（可能会卡顿）',
+            text='全部执行',
             command=self.allAction,
             width=10,
             height=2
@@ -128,7 +129,7 @@ class App(tk.Frame):
 
         self.saveButton = tk.Button(
             master,
-            text='保存结果',
+            text='保存结果\n（当前表单）',
             command=self.saveResult,
             width=10,
             height=2
@@ -274,25 +275,30 @@ class App(tk.Frame):
         """
         执行全部
         """
+        def fun():
+            # algebra
+            while next(self.algebra, False):
+                pass
+                # self.insertData(self.st.dict)
+            else:
+                self.actionFlag += 1
+            # preeditFormat
+            while next(self.preeditFormat, False):
+                pass
+                # self.insertData(self.st.dict)
+            else:
+                self.actionFlag += 1
+                self.insertData(self.st.dict)
+                print("全部执行完成。")
+
         # 判断是否已经加载数据
         if not('actionFlag' in vars(self).keys()):
             messagebox.showinfo("提示", "请先加载/重载")
             return
-        # algebra
-        while next(self.algebra, False):
-            pass
-            # self.insertData(self.st.dict)
-        else:
-            self.actionFlag += 1
-        # preeditFormat
-        while next(self.preeditFormat, False):
-            pass
-            # self.insertData(self.st.dict)
-        else:
-            self.actionFlag += 1
-            self.insertData(self.st.dict)
-            print("全部执行完成。")
-    
+        # 执行全部-新线程
+        t = threading.Thread(target=fun)
+        t.start()
+
     def saveResult(self):
         # 判断是否已经加载数据
         if not('actionFlag' in vars(self).keys()):
