@@ -34,7 +34,7 @@ jobs:
         path: ./
 
     - name: Build RimeSpellTool
-      run: pyinstaller --name="雾凇魔法工具.exe" --onefile --windowed --icon "App.png" App.py
+      run: pyinstaller --name="雾凇魔法工具.exe" --onefile --windowed --icon "App.ico" App.py
 
     # 上传编译的可执行文件
     - name: Upload RimeSpellTool
