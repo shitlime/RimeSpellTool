@@ -1,5 +1,7 @@
 import tkinter as tk
 import threading
+import base64
+import os
 import sys
 
 from tkinter import ttk
@@ -9,6 +11,7 @@ from tkinter import scrolledtext
 import tkinter.font as tkFont
 from tkinter import END
 
+import icon
 import SpellTool
 from SpellTool import *
 
@@ -22,8 +25,13 @@ class App(tk.Frame):
         """
         super().__init__(master)
         self.grid()
-        self.appName = "RIME Spell Tool/雾凇魔法工具 v0.4"
+        self.appName = "RIME Spell Tool/雾凇魔法工具 v0.5"
         self.master.title(self.appName)
+        # 图标
+        with open('temp.png', 'wb') as f:
+            f.write(base64.b64decode(icon.img))
+        self.master.iconphoto(True, tk.PhotoImage(file='temp.png'))
+        os.remove('temp.png')
         # 字体
         fontfamilylist = tkFont.families()
         if '宋体' in fontfamilylist:
