@@ -114,7 +114,8 @@ class SpellTool(object):
             derive：衍生（保留原型）
             """
             pattern = regex.compile(pattern)
-            for i in range(len(self.dict)):
+            i = 0
+            while i < len(self.dict):
                 if len(self.dict[i]) == 2:
                     # 码
                     code = self.dict[i][1]
@@ -122,8 +123,12 @@ class SpellTool(object):
                     # algebra
                     code = self.dict[i][2]
                 # 衍生/derive
-                if pattern.search(code):
-                    self.dict.insert((i+1), [None, None, substitute(pattern, replace, code)])
+                for flag in [ pattern.search(c) for c in code.split(' ') ]:
+                    if flag:
+                        # 词的编码只要有一个部分符合衍生，就对整个衍生
+                        self.dict.insert((i+1), ['(derive)', '(derive)', substitute(pattern, replace, code)])
+                        break
+                i += 1
 
         # 主体
         for i in range(len(self.algebra)):
