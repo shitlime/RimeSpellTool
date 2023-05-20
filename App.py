@@ -1,7 +1,5 @@
 import tkinter as tk
 import threading
-import base64
-import os
 import sys
 
 from tkinter import ttk
@@ -28,10 +26,7 @@ class App(tk.Frame):
         self.appName = "RIME Spell Tool/雾凇魔法工具 v0.5"
         self.master.title(self.appName)
         # 图标
-        with open('temp.png', 'wb') as f:
-            f.write(base64.b64decode(icon.img))
-        self.master.iconphoto(True, tk.PhotoImage(file='temp.png'))
-        os.remove('temp.png')
+        self.master.iconphoto(True, tk.PhotoImage(data=icon.img))
         # 字体
         fontfamilylist = tkFont.families()
         if '宋体' in fontfamilylist:
@@ -146,7 +141,7 @@ class App(tk.Frame):
 
         self.saveAllButton = tk.Button(
             master,
-            text='转换词库\n并保存',
+            text='转换词库\n并另存为...',
             command=self.saveAll,
             width=10,
             height=2
