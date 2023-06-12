@@ -19,13 +19,39 @@ RIME 输入法的拼写运算测试工具
 **注意：目前只实现了 `xform` 、 `xlit` 、 `algebra:derive` 运算**
 
 
-## 依赖
+## 安装
 
-见[依赖文件](requirements.txt)
+### 依赖
+
+详细见[依赖文件](requirements.txt)
 
 依赖安装：
 ```shell
 pip install -r requirements.txt
+```
+
+> ⚠️注意：开发使用的Python版本为3.10.7，若使用其他版本可能出现一些bug
+
+
+### Windows
+
++ 可以直接使用release中发布的 `.exe` 文件
+
++ 也可以安装依赖后，打开 `App.py` 文件
+
+
+### Linux
+
+1. 安装依赖
+
+2. 在项目根目录运行
+```sh
+./App.py
+```
+
+如果没有执行权限，请使用：
+```sh
+chmod +x ./App.py
 ```
 
 
